@@ -11,17 +11,15 @@ body {
      margin: 0px;
  }
 
+ @media screen and (max-width: 960px) {
+    mat-tooltip-component {
+        display: none !important;
+    }
+}
+
+
 .mat-input-underline.mat-form-field-underline {
     background-color: #ebebeb;
-}
-.nav-toolbar {
-    min-height: 64px !important;
-    height: 64px !important;
-    padding: 24px;
-    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;
-}
-.nav-toolbar div.mat-toolbar-layout mat-toolbar-row {
-    height: 64px !important;
 }
 .mat-menu-panel {
     max-height: 350px !important;
