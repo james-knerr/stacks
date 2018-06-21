@@ -1,0 +1,4 @@
+<input type="file" name="file" id="file" (change)="onChange($event)" class="inputfile" [disabled]="disabled" />
+<label mat-icon-button for="file" [class.disabled]="disabled">
+    <mat-icon class="mdi-24px" fontSet="mdi" [style.cursor]="disabled ? 'auto' : 'pointer'" [style.color]="disabled ? 'rgba(0, 0, 0, 0.38)' : 'rgba(0, 0, 0, 0.87)'" fontIcon="mdi-upload"></mat-icon>
+</label>

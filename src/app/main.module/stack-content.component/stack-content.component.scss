@@ -1,0 +1,61 @@
+@import '../main.styles.scss';
+
+.custom-card {
+    margin-top: 8px;
+    position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-content: center;
+        align-items: center;
+        border: 1px solid rgba(0, 0, 0, .03);
+        box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
+        border-radius: 2px;
+        color: rgba(0, 0, 0, .87);
+}
+
+.overlay {
+    position: absolute; 
+    bottom: 0; 
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.25); /* Black see-through */
+    color: #f1f1f1; 
+    width: 100%;
+    transition: .5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+  }
+  .custom-card:hover .overlay {
+    opacity: 1;
+  }
+img {
+    vertical-align: middle;
+}
+
+.column {
+    flex: 25%;
+    max-width: 25%;
+    -ms-flex: 25%;
+    padding: 0 4px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}

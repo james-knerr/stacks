@@ -1,0 +1,25 @@
+@import '../main.styles.scss';
+
+.nav-list-item {
+    background-color: #fff;
+    color: rgba(0,0,0,0.87);
+}
+
+.nav-list-icon {
+    color: rgba(0,0,0,0.54);
+}
+
+.nav-list-item.selected {
+    background-color: #76B29D;
+    color: rgba(255,255,255,0.87);
+}
+
+.nav-list-icon.selected {
+    color: rgba(255,255,255,0.87);
+}
+
+#speedDial {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}

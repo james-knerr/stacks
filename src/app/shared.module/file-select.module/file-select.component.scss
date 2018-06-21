@@ -1,0 +1,23 @@
+.inputfile {
+	display: none;
+}
+
+.disabled{
+        color: rgba(0, 0, 0, 0.38);
+}
+
+i {
+    position:relative;
+    top: 6px;    
+    left:0;
+}
+label {
+    padding: 0;
+    min-width: 0;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    line-height: 40px;
+    margin-top: 16px;
+    text-align: center;
+}

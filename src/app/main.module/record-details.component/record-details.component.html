@@ -1,0 +1,22 @@
+<mat-toolbar mat-dialog-title class="dialog-toolbar">
+      {{record?.title != null ? record.title : 'Record Details'}}
+      </mat-toolbar>
+      <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 80vh; width: 50vw; text-align: center;">
+                    <img style="display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 50%;" src="{{record?.imageUrl}}">
+                    <mat-form-field color="accent" style="font-size: 16px; max-height: 15%; flex-basis: 25%; flex-shrink: 1;">
+                            <mat-label>Title</mat-label>
+                            <input matInput disabled [(ngModel)]="record.title" >
+                          </mat-form-field>
+                          <mat-form-field color="accent" style="font-size: 16px; max-height: 15%; flex-basis: 25%; flex-shrink: 1;">
+                                <mat-label>Source URL</mat-label>
+                                <input matInput disabled [(ngModel)]="record.sourceUrl" >
+                              </mat-form-field>
+                </div>
+      <div mat-dialog-actions>
+          <span style="flex: 1 1 auto;"></span>
+        <span>
+          <button mat-button (click)="closeDetails()">CLOSE</button></span>
+      </div>
