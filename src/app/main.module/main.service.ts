@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { StackListVM, StackVM } from '../shared.module/models/stack-vm';
-import { RecordVM } from '../shared.module/models/record-vm';
 
 @Injectable()
 export class MainService {

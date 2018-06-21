@@ -46,7 +46,7 @@ export class AddRecordFormComponent {
         this._mainService.updateStack(this.stack)
       .subscribe(kk => {
         this.isBusy = false;
-        this._snackBar.open('success', 'Added New Record!', 'OK');
+        this._snackBar.open('success', 'Added New Image!', 'OK');
         this._selfDialogRef.close({ event: 'added', data: this.stack });
       }, err => {
         this._snackBar.open('error', err, 'OK');

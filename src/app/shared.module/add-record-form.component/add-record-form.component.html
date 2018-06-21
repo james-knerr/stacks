@@ -2,7 +2,7 @@
     <span>
             <mat-icon style="vertical-align: top;color:rgba(255,255,255,0.87);" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image"></mat-icon>
     </span>
-        <span style="margin-left: 8px;">New Record</span>
+        <span style="margin-left: 8px;">New Image</span>
         </mat-toolbar>
         <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 80vh; width: 50vw; text-align: center; position: relative;">
                 <app-component-spinner [isBusy]="isBusy"></app-component-spinner>
@@ -28,7 +28,7 @@
           <span style="flex: 1 1 auto;"></span>
           <span>
             <button mat-raised-button [style.background-color]="record.imageUrl ? '#76B29D' : 'rgba(0,0,0,.12)'" [style.color]="record.imageUrl ? '#fafafa' : 'rgba(0, 0, 0, 0.26)'" (click)="saveRecord()" [disabled]="!record.imageUrl">
-                                        SAVE NEW RECORD
+                                        SAVE NEW IMAGE
                                     </button>
             </span>
         </div>
