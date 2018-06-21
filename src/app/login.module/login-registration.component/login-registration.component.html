@@ -38,9 +38,9 @@
           <a class="underline" routerLink="../terms" routerLinkActive="active">Terms of Service</a>.</span>
       </span>
     </div>
-    <button mat-raised-button color="primary" (click)="register()" [disabled]="isBusy || !is18YearsOrOlder || !hasAgreedToTerms || !registerVM?.username || !registerVM?.password || !registerVM?.passwordConfirm">
+    <button mat-raised-button color="primary" (click)="register()" disabled [style.color]="'rgba(0, 0, 0, 0.38)'">
       <span style="padding-right: 20px;">Sign Up</span>
-      <mat-icon style="vertical-align: middle;" [style.color]="!registerVM?.username || !is18YearsOrOlder || !hasAgreedToTerms || !registerVM?.password  || !registerVM?.passwordConfirm ? 'rgba(0, 0, 0, 0.38)' : 'white'"
+      <mat-icon style="vertical-align: sub;" [style.color]="'rgba(0, 0, 0, 0.38)'"
         class="mdi-18px" fontSet="mdi" fontIcon="mdi-{{
               isBusy ? 'loading' : 'arrow-right'
           }}" [class.spin]="isBusy"></mat-icon>
