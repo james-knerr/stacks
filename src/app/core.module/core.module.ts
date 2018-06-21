@@ -1,22 +1,22 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
-import {
-  MatSnackBarModule,
-  MatSnackBar
-} from '@angular/material';
-
+import { CacheService } from 'ng2-cache';
+import { AuthGuardService } from './services/auth-guard.service';
 import { SnackBarService } from './services/snackbar.service';
+import { LoginModule } from '../login.module/login.module';
 
 @NgModule({
-  imports: [MatSnackBarModule],
+  imports: [
+    LoginModule
+  ],
   declarations: [],
-  providers: [MatSnackBar, SnackBarService]
+  providers: [AuthGuardService, CacheService, SnackBarService]
 })
 export class CoreModule {
 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [MatSnackBar, SnackBarService]
+      providers: [AuthGuardService, CacheService, SnackBarService]
     };
   }
 

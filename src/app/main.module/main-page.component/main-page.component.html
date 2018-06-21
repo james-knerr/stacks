@@ -1,0 +1,33 @@
+<div class="app-container" [class.is-mobile]="mobileQuery.matches">
+    <mat-toolbar class="app-toolbar">
+      <button mat-icon-button (click)="appSideNav.toggle()" matTooltip="{{appSideNav.opened ? 'Hide Stacks' : 'View Stacks'}}" [matTooltipPosition]="'after'" ><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button>
+      <span style="flex: 1 1 auto; text-align: center;"><mat-icon style="vertical-align: text-bottom;" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter"></mat-icon>
+        <span style="margin-left: 8px; font-family: 'Lobster', cursive; font-size: 32px;">Stacks</span></span>
+    </mat-toolbar>
+    <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0">
+      <mat-sidenav #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
+          <mat-nav-list style="padding-top: 0px;">
+          <a mat-list-item *ngFor="let stack of stacks | deleteFilter" class="nav-list-item" [class.selected]="isStackSelected(stack.id)" (click)="stackSelected(stack.id)">
+              <h3 matLine> {{stack.title && stack.title.length > 15 ? stack.title.substring(0,15) + '...' : stack.title}} </h3>
+              <!--<button mat-icon-button (click)="deleteStack($event, stack.id)">
+                    <mat-icon style="vertical-align: middle;" class="mdi-24px nav-list-icon" [class.selected]="isStackSelected(stack.id)" fontSet="mdi" fontIcon="mdi-delete"></mat-icon>
+             </button>-->
+            </a>
+          </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content>
+          <router-outlet>
+            </router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  <eco-fab-speed-dial id="speedDial" #speedDial (mouseleave)="speedDial.open = false">
+      <eco-fab-speed-dial-trigger>
+          <button mat-fab (mouseenter)="speedDial.open = true"><mat-icon style="vertical-align: middle; color:#fafafa; width: 32px; font-size: 32px;" fontSet="mdi" fontIcon="mdi-plus"></mat-icon></button>
+      </eco-fab-speed-dial-trigger>
+  
+      <eco-fab-speed-dial-actions>
+          <button mat-mini-fab matTooltip="Add Stack" [matTooltipPosition]="'before'" (click)="addStack()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-18px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button>
+          <button mat-mini-fab matTooltip="Add Image" [matTooltipPosition]="'before'" (click)="addRecord()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-21px" fontSet="mdi" fontIcon="mdi-image"></mat-icon></button>
+      </eco-fab-speed-dial-actions>
+  </eco-fab-speed-dial>

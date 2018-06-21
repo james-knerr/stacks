@@ -1,0 +1,33 @@
+<div fxLayout="row" style="height: 100%; width: 100%;">
+	<mat-card fxLayout="column" fxFlex="50" fxFlex.xs="70" fxFlex.gt-sm="35" fxFlexOffset="25" fxFlexOffset.xs="15" fxFlexOffset.gt-sm="35"
+	 fxLayoutGap="20px" fxLayoutAlign="space-around center" class="sign-in-card" (keypress)="pressedKey($event.keyCode)">
+		<div fxLayout="row" fxLayoutAlign="center">
+			<div class="logo-container" fxLayout="column" fxLayoutAlign="center center">
+				<img class="logo" src="../../assets/logo-128x128.png">
+			</div>
+		</div>
+		<h2>Sign In</h2>
+		<div fxLayout fxLayout="row" fxFill>
+			<mat-form-field color="accent" fxFlex="95" fxFlexOffset="2.5">
+				<input matInput type="text" [disabled]="isBusy" name="username" placeholder="Email Address" [(ngModel)]="loginVM.username"
+				 required>
+			</mat-form-field>
+		</div>
+		<div fxLayout fxLayout="row" fxFill>
+			<mat-form-field color="accent" fxFlex="95" fxFlexOffset="2.5">
+				<input matInput type="password" [disabled]="isBusy" name="pwd" placeholder="Password" [(ngModel)]="loginVM.password" required>
+			</mat-form-field>
+		</div>
+		<button mat-raised-button color="primary"  [style.color]="!loginVM.username || !loginVM.password ? 'rgba(0, 0, 0, 0.38)' : 'white'" (click)="login()" [disabled]="isBusy || !loginVM.username || !loginVM.password">
+			<span style="padding-right: 20px;">Sign In</span>
+			<mat-icon style="vertical-align: sub;" [style.color]="!loginVM.username || !loginVM.password ? 'rgba(0, 0, 0, 0.38)' : 'white'"
+			 class="mdi-18px" fontSet="mdi" fontIcon="mdi-{{
+              isBusy ? 'loading' : 'arrow-right'
+          }}" [class.spin]="isBusy"></mat-icon>
+		</button>
+		<a routerLink="../forgot-password" routerLinkActive="active">Forgot Password?</a>
+		<p>Need an account?
+			<a routerLink="../sign-up" routerLinkActive="active">Sign Up</a>
+		</p>
+	</mat-card>
+</div>

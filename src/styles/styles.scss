@@ -17,6 +17,17 @@ body {
     }
 }
 
+a {
+    cursor: pointer !important;
+    text-decoration: none !important;
+    color: rgba(4, 114, 77, 0.75);
+}
+a:hover,
+a:focus {
+    cursor: pointer !important;
+    text-decoration: none !important;
+    color: rgba(4, 114, 77, 1);
+}
 
 .mat-input-underline.mat-form-field-underline {
     background-color: #ebebeb;
@@ -344,4 +355,52 @@ mat-icon.light {
   }
   .mat-form-field-infix {
       width: 100% !important;
+  }
+  
+.toolbar-header-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.toolbar-header-icon-container {
+    background-color: #95A5A5;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+    text-align: center;
+}
+.toolbar-header-img-container {
+    background-color: rgb(230, 230, 230);
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.app-toolbar div.mat-toolbar-layout mat-toolbar-row {
+    height: 64px !important;
+}
+.app-toolbar {
+    min-height: 64px !important;
+    height: 64px !important;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12) !important;
+    position: relative;
+    z-index: 10;
+    background-color: #454955;
+    color: #fafafa;
+  }
+  
+.is-mobile .app-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 10;
   }

@@ -1,0 +1,46 @@
+@import '../main.styles.scss';
+
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  mat-sidenav {
+    border-right: solid 1px rgba(0, 0, 0, 0.32);
+    min-width: 200px !important;
+  }
+  
+  .app-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+  }
+  
+.nav-list-item {
+    background-color: #fff;
+    color: rgba(0,0,0,0.87);
+}
+
+.nav-list-icon {
+    color: rgba(0,0,0,0.54);
+}
+
+.nav-list-item.selected {
+    background-color: #76B29D;
+    color: rgba(255,255,255,0.87);
+}
+
+.nav-list-icon.selected {
+    color: rgba(255,255,255,0.87);
+}
+
+#speedDial {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
