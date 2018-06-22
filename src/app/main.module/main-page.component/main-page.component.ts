@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import { CacheService } from 'ng2-cache';
 import { MainService } from '../main.service';
 import { LoginService } from '../../login.module/login.service';
+import { TutorialOverlayService } from '../../shared.module/tutorial.module/tutorial-overlay.service';
 import { AddRecordFormComponent } from '../../shared.module/add-record-form.component/add-record-form.component';
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
 
@@ -21,6 +22,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
 
   constructor(
+    private _tutorialOverlayService: TutorialOverlayService,
     private _cacheService: CacheService,
     private _loginService: LoginService,
     private _dialog: MatDialog,
@@ -101,7 +103,7 @@ public logout() {
 }
 
 public showTutorial() {
-
+  this._tutorialOverlayService.open();
 }
 
 public showAbout() {
