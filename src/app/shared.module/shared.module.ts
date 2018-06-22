@@ -5,7 +5,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material.module/material.module';
 import { FileSelectModule } from './file-select.module/file-select.module';
-import { TutorialModule } from './tutorial.module/tutorial.module';
 
 import { AddRecordFormComponent } from './add-record-form.component/add-record-form.component';
 import { ComponentSpinnerComponent } from './component-spinner.component/component-spinner.component';
@@ -20,8 +19,7 @@ import { MainService } from '../main.module/main.service';
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
-    FileSelectModule,
-    TutorialModule
+    FileSelectModule
   ],
   declarations: [
     AddRecordFormComponent,
@@ -35,7 +33,6 @@ import { MainService } from '../main.module/main.service';
     FlexLayoutModule,
     MaterialModule,
     FileSelectModule,
-    TutorialModule,
     AddRecordFormComponent,
     ComponentSpinnerComponent,
     DeleteFilterPipe,

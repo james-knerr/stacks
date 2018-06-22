@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material';
 import { CacheService } from 'ng2-cache';
 import { MainService } from '../main.service';
 import { LoginService } from '../../login.module/login.service';
-import { TutorialOverlayService } from '../../shared.module/tutorial.module/tutorial-overlay.service';
 import { AddRecordFormComponent } from '../../shared.module/add-record-form.component/add-record-form.component';
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
 
@@ -19,10 +18,20 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public selectedStackId: string;
   public mobileQuery: MediaQueryList;
 
+  public tutorialStep = 1;
+  public tutorialVisible = false;
+  public tutorialStepTop = '0px';
+  public tutorialStepLeft = '0px';
+  public tutorialStepText = '';
+  public showTutorialPreviousBtn = false;
+  public tutorialNextBtnText = '';
+  public tutorialArrowDirection = '';
+  public tutorialArrowLeft = '0px';
+  public tutorialArrowTop = '0px';
+
   private _mobileQueryListener: () => void;
 
   constructor(
-    private _tutorialOverlayService: TutorialOverlayService,
     private _cacheService: CacheService,
     private _loginService: LoginService,
     private _dialog: MatDialog,
@@ -103,7 +112,91 @@ public logout() {
 }
 
 public showTutorial() {
-  this._tutorialOverlayService.open();
+  this.tutorialStep = 1;
+  this.tutorialVisible = true;
+  const tutorialSubject = document.getElementById('toggleStacksBtn');
+  this.tutorialStepTop = tutorialSubject.offsetTop.toString() + 'px';
+  this.tutorialStepLeft = (tutorialSubject.offsetLeft + 75).toString() + 'px';
+  this.tutorialArrowDirection = 'left';
+  this.tutorialArrowLeft = (tutorialSubject.offsetLeft + 51).toString() + 'px';
+  this.tutorialArrowTop = (tutorialSubject.offsetTop + 12).toString() + 'px';
+  this.tutorialStepText = 'Click here to show or hide the list of stacks';
+  this.showTutorialPreviousBtn = false;
+  this.tutorialNextBtnText = 'NEXT';
+}
+
+public nextStep() {
+  switch (this.tutorialStep) {
+    case 1: {
+      this.tutorialStep = 2;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '200px';
+      this.tutorialStepLeft = '200px';
+      this.tutorialStepText = 'Click on a stack to view the images within it';
+      this.showTutorialPreviousBtn = true;
+      this.tutorialNextBtnText = 'NEXT';
+      break;
+    }
+    case 2: {
+      this.tutorialStep = 3;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '300px';
+      this.tutorialStepLeft = '300px';
+      this.tutorialStepText = 'Click here to create a new stack';
+      this.showTutorialPreviousBtn = true;
+      this.tutorialNextBtnText = 'NEXT';
+      break;
+    }
+    case 3: {
+      this.tutorialStep = 4;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '400px';
+      this.tutorialStepLeft = '400px';
+      this.tutorialStepText = 'Click here to add an image to the selected stack';
+      this.showTutorialPreviousBtn = true;
+      this.tutorialNextBtnText = 'FINISH';
+      break;
+    }
+    case 4: {
+      this.tutorialVisible = false;
+      break;
+    }
+  }
+}
+
+public prevStep() {
+  switch (this.tutorialStep) {
+    case 2: {
+      this.tutorialStep = 1;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '100px';
+      this.tutorialStepLeft = '100px';
+      this.tutorialStepText = 'Click here to show or hide the list of stacks';
+      this.showTutorialPreviousBtn = false;
+      this.tutorialNextBtnText = 'NEXT';
+      break;
+    }
+    case 3: {
+      this.tutorialStep = 2;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '200px';
+      this.tutorialStepLeft = '200px';
+      this.tutorialStepText = 'Click on a stack to view the images within it';
+      this.showTutorialPreviousBtn = true;
+      this.tutorialNextBtnText = 'NEXT';
+      break;
+    }
+    case 4: {
+      this.tutorialStep = 3;
+      this.tutorialVisible = true;
+      this.tutorialStepTop = '300px';
+      this.tutorialStepLeft = '300px';
+      this.tutorialStepText = 'Click here to create a new stack';
+      this.showTutorialPreviousBtn = true;
+      this.tutorialNextBtnText = 'NEXT';
+      break;
+    }
+  }
 }
 
 public showAbout() {

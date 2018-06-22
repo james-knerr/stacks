@@ -404,3 +404,28 @@ mat-icon.light {
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */
     z-index: 10;
   }
+
+  .tutorial-panel {
+    padding: 20px;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    border-color: #76B29D;
+    border-style: solid;
+    border-width: 3px;
+    outline: 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    overflow: hidden;
+    background: #fafafa;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-height: 350px !important;
+    min-width: 112px;
+    max-width: 280px;
+  }
+
+  .dark-backdrop {
+      background-color: rgba(0, 0, 0, 0.35);
+  }

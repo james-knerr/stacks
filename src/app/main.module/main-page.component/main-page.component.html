@@ -1,6 +1,6 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
     <mat-toolbar class="app-toolbar">
-      <span style="flex: 33.3; text-align: left;"><button mat-icon-button (click)="appSideNav.toggle()" matTooltip="{{appSideNav.opened ? 'Hide Stacks' : 'View Stacks'}}" [matTooltipPosition]="'after'" ><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button></span>
+      <span style="flex: 33.3; text-align: left;"><button id="toggleStacksBtn" mat-icon-button (click)="appSideNav.toggle()" matTooltip="{{appSideNav.opened ? 'Hide Stacks' : 'View Stacks'}}" [matTooltipPosition]="'after'" ><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button></span>
       <span style="flex: 33.3; text-align: center;"><mat-icon style="vertical-align: text-bottom;" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter"></mat-icon>
         <span style="margin-left: 8px; font-family: 'Lobster', cursive; font-size: 32px;">Stacks</span></span>
         <span style="flex: 33.3; text-align: right;"><button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-dots-vertical"></mat-icon></button></span>
@@ -25,7 +25,7 @@
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0">
       <mat-sidenav #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
-          <mat-nav-list style="padding-top: 0px;">
+          <mat-nav-list id="navList" style="padding-top: 0px;">
           <a mat-list-item *ngFor="let stack of stacks | deleteFilter" class="nav-list-item" [class.selected]="isStackSelected(stack.id)" (click)="stackSelected(stack.id)">
               <h3 matLine> {{stack.title && stack.title.length > 15 ? stack.title.substring(0,15) + '...' : stack.title}} </h3>
               <!--<button mat-icon-button (click)="deleteStack($event, stack.id)">
@@ -46,7 +46,28 @@
       </eco-fab-speed-dial-trigger>
   
       <eco-fab-speed-dial-actions>
-          <button mat-mini-fab matTooltip="Add Stack" [matTooltipPosition]="'before'" (click)="addStack()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-18px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button>
-          <button mat-mini-fab matTooltip="Add Image" [matTooltipPosition]="'before'" (click)="addRecord()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-21px" fontSet="mdi" fontIcon="mdi-image"></mat-icon></button>
+          <button mat-mini-fab id="addStackBtn" matTooltip="Add Stack" [matTooltipPosition]="'before'" (click)="addStack()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-18px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button>
+          <button mat-mini-fab id="addImageBtn" matTooltip="Add Image" [matTooltipPosition]="'before'" (click)="addRecord()"><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-21px" fontSet="mdi" fontIcon="mdi-image"></mat-icon></button>
       </eco-fab-speed-dial-actions>
   </eco-fab-speed-dial>
+
+
+  <div class="cdk-overlay-container" *ngIf="tutorialVisible">
+    <div class="cdk-overlay-connected-position-bounding-box"
+    dir="ltr"
+    style="top: 12px; right: 15.7875px; height: 100%; width: 100%; align-items: flex-end; justify-content: flex-start;">
+    <div id="cdk-overlay-0" class="cdk-overlay-pane" style="pointer-events: none; position: static;"></div></div>
+    <div class="cdk-overlay-backdrop dark-backdrop cdk-overlay-backdrop-showing"></div>
+    <div class="triangle-left" *ngIf="tutorialArrowDirection === 'left'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
+    <div class="triangle-up" *ngIf="tutorialArrowDirection === 'up'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
+    <div class="triangle-right" *ngIf="tutorialArrowDirection === 'right'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
+    <div class="triangle-down" *ngIf="tutorialArrowDirection === 'down'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
+    <div dir="ltr"><div id="cdk-overlay-1"
+      [style.top]="tutorialStepTop"
+      [style.left]="tutorialStepLeft" class="cdk-overlay-pane tutorial-panel" style="pointer-events: auto; display: flex; flex-direction: column;">
+      {{tutorialStepText}}
+      <div style="display: flex; padding-top: 20px;" [style.justify-content]="showTutorialPreviousBtn ? 'space-between' : 'flex-end'">
+          <button mat-button (click)="prevStep()" *ngIf="showTutorialPreviousBtn">PREVIOUS</button>
+          <button mat-button (click)="nextStep()">{{tutorialNextBtnText}}</button>
+      </div>
+        </div></div></div>
