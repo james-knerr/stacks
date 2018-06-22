@@ -1,8 +1,27 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
     <mat-toolbar class="app-toolbar">
-      <button mat-icon-button (click)="appSideNav.toggle()" matTooltip="{{appSideNav.opened ? 'Hide Stacks' : 'View Stacks'}}" [matTooltipPosition]="'after'" ><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button>
-      <span style="flex: 1 1 auto; text-align: center;"><mat-icon style="vertical-align: text-bottom;" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter"></mat-icon>
+      <span style="flex: 33.3; text-align: left;"><button mat-icon-button (click)="appSideNav.toggle()" matTooltip="{{appSideNav.opened ? 'Hide Stacks' : 'View Stacks'}}" [matTooltipPosition]="'after'" ><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon></button></span>
+      <span style="flex: 33.3; text-align: center;"><mat-icon style="vertical-align: text-bottom;" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter"></mat-icon>
         <span style="margin-left: 8px; font-family: 'Lobster', cursive; font-size: 32px;">Stacks</span></span>
+        <span style="flex: 33.3; text-align: right;"><button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-dots-vertical"></mat-icon></button></span>
+        <mat-menu x-position="before" #appMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="active">
+              <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-account-circle"></mat-icon>
+              <span style="vertical-align: middle;"> Profile </span>
+            </button>
+            <button mat-menu-item (click)="showTutorial()">
+                <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-help-circle"></mat-icon>
+                <span style="vertical-align: middle;"> Tutorial </span>
+              </button>
+              <button mat-menu-item (click)="showAbout()">
+                <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-information"></mat-icon>
+                <span style="vertical-align: middle;"> About </span>
+              </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-lock"></mat-icon>
+              <span style="vertical-align: middle;"> Sign Out </span>
+            </button>
+          </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0">
       <mat-sidenav #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">

@@ -1,23 +1,12 @@
 <div fxLayout="row" style="height: 100%; width: 100%;">
-  <mat-card fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center stretch" class="sign-in-card" fxFlex="60" fxFlexOffset="20"
-    style="min-height: 70vh; max-height: 70vh; overflow-y: auto; padding-top: 0px !important; padding-left: 0px !important; padding-right: 0px !important;">
-    <mat-toolbar class="app-toolbar">
-      <span>
-        <div class="toolbar-header-img-container">
-          <img class="toolbar-header-img" src="../../../assets/logo-128x128.png" alt="">
-        </div>
-      </span>
-      <span style="letter-spacing: .5px; font-weight: 500; padding-left: 10px;">Terms of Service</span>
-    </mat-toolbar>
-    <div fxLayout="row" fxLayoutAlign="space-around start">
-      <div class="image-backdrop" fxLayout="row" fxLayoutAlign="center stretch">
-        <div fxFlex fxLayout="column" fxLayoutAlign="center center">
-          <iframe [src]="url" frameborder="0" fxFlexFill></iframe>
-        </div>
-      </div>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <a routerLink="../sign-up" routerLinkActive="active">Sign Up</a>
-    </div>
-  </mat-card>
-</div>
+    <mat-card fxLayout="column" fxFlex="50" fxFlex.xs="70" fxFlex.gt-sm="35" fxFlexOffset="25" fxFlexOffset.xs="15" fxFlexOffset.gt-sm="32.5"
+     fxLayoutGap="20px" fxLayoutAlign="space-around center" class="sign-in-card" (keypress)="pressedKey($event.keyCode)">
+     <mat-toolbar class="app-toolbar">
+        <span style="flex: 1 1 auto; text-align: center;"><mat-icon style="vertical-align: text-bottom;" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter"></mat-icon>
+          <span style="margin-left: 8px; font-family: 'Lobster', cursive; font-size: 32px;">Stacks</span></span>
+        </mat-toolbar>
+      <h2>Terms of Service</h2>
+      <pre class="termsOfService">{{termsOfService}}</pre>
+      <a routerLink="../sign-in" routerLinkActive="active">Sign In</a>
+    </mat-card>
+  </div>

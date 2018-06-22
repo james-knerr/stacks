@@ -1,7 +1,15 @@
 @import '../login.styles.scss';
 
-.image-backdrop {
-    align-self: center;
-    height: 70vh;
-    width: 50vw; 
+.termsOfService {
+    max-height: 50vh;
+    background: rgba(0, 0, 0, 0.01);
+    border: 0.5px solid rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+    display: block;
+    margin: 16px auto;
+    overflow-y: auto;
+    padding: 20px;
+    white-space: pre-wrap;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 14px;
 }

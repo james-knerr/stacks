@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { cacheKeys } from '../../app.constants';
 
 @Component({
   selector: 'app-login-registration-terms',
@@ -7,9 +7,8 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
   styleUrls: ['./login-registration-terms.component.scss']
 })
 export class LoginRegistrationTermsComponent {
-  public url: SafeResourceUrl;
-  constructor(private _sanitizer: DomSanitizer) {
-    this.url =
-      this._sanitizer.bypassSecurityTrustResourceUrl('https://drive.google.com/file/d/0B1gQDVpy0NOLNnZ1aDRONmhUeUU/view?usp=sharing');
+  public termsOfService: string;
+  constructor() {
+    this.termsOfService = cacheKeys.termsOfService;
   }
 }

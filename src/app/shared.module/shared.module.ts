@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from './material.module/material.module';
 import { FileSelectModule } from './file-select.module/file-select.module';
+import { LazyModule } from './lazy.module/lazy.module';
 
 import { AddRecordFormComponent } from './add-record-form.component/add-record-form.component';
 import { ComponentSpinnerComponent } from './component-spinner.component/component-spinner.component';
@@ -19,7 +20,8 @@ import { MainService } from '../main.module/main.service';
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
-    FileSelectModule
+    FileSelectModule,
+    LazyModule
   ],
   declarations: [
     AddRecordFormComponent,
@@ -28,6 +30,7 @@ import { MainService } from '../main.module/main.service';
     SliceArrayPipe
   ],
   exports: [
+    LazyModule,
     CommonModule,
     FormsModule,
     FlexLayoutModule,

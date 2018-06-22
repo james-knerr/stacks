@@ -2,7 +2,9 @@ import { Component, ChangeDetectorRef, OnInit, OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
+import { CacheService } from 'ng2-cache';
 import { MainService } from '../main.service';
+import { LoginService } from '../../login.module/login.service';
 import { AddRecordFormComponent } from '../../shared.module/add-record-form.component/add-record-form.component';
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
 
@@ -19,6 +21,8 @@ export class MainPageComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
 
   constructor(
+    private _cacheService: CacheService,
+    private _loginService: LoginService,
     private _dialog: MatDialog,
     private _mainService: MainService,
     private _router: Router,
@@ -88,6 +92,20 @@ public handleAddRecordFormClose(result: { event: string, data?: StackVM }) {
       // throw error
           break;
   }
+}
+
+public logout() {
+  this._loginService.logout();
+  this._cacheService.removeAll();
+  this._router.navigate(['auth/sign-in']);
+}
+
+public showTutorial() {
+
+}
+
+public showAbout() {
+
 }
 
 }
