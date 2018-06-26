@@ -8,6 +8,7 @@ import { FileSelectModule } from './file-select.module/file-select.module';
 
 import { AddRecordFormComponent } from './add-record-form.component/add-record-form.component';
 import { ComponentSpinnerComponent } from './component-spinner.component/component-spinner.component';
+import { GuidedTourComponent } from './guided-tour.module/guided-tour.component/guided-tour.component';
 
 import { DeleteFilterPipe } from './pipes/deleted-stacks.pipe';
 import { SliceArrayPipe } from './pipes/slice-array.pipe';
@@ -24,6 +25,7 @@ import { MainService } from '../main.module/main.service';
   declarations: [
     AddRecordFormComponent,
     ComponentSpinnerComponent,
+    GuidedTourComponent,
     DeleteFilterPipe,
     SliceArrayPipe
   ],
@@ -35,6 +37,7 @@ import { MainService } from '../main.module/main.service';
     FileSelectModule,
     AddRecordFormComponent,
     ComponentSpinnerComponent,
+    GuidedTourComponent,
     DeleteFilterPipe,
     SliceArrayPipe
   ],

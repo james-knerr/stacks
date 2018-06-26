@@ -1,0 +1,18 @@
+<div class="overlay-container" *ngIf="isVisible">
+        <div class="overlay-backdrop"></div>
+        <div [ngClass]="{'triangle-left': isCurrentRelativePosition('right'),
+        'triangle-right': isCurrentRelativePosition('left'),
+        'triangle-up': isCurrentRelativePosition('below'),
+        'triangle-down': isCurrentRelativePosition('above')}"
+        [style.left]="arrowAbsoluteLeft"
+        [style.right]="arrowAbsoluteRight"
+        [style.top]="arrowAbsoluteTop"
+        [style.bottom]="arrowAbsoluteBottom"
+        ></div>
+        <div id="overlay" class="overlay" [style.left]="stepAbsoluteLeft" [style.right]="stepAbsoluteRight" [style.top]="stepAbsoluteTop" [style.bottom]="stepAbsoluteBottom">
+          {{getCurrentStepText()}}
+          <div style="display: flex; padding-top: 20px;" [style.justify-content]="currentStep > 1 ? 'space-between' : 'flex-end'">
+              <button mat-button (click)="prevStep()" *ngIf="currentStep > 1">PREVIOUS</button>
+              <button mat-button (click)="nextStep()">{{currentStep === config.steps.length ? 'FINISH' : 'NEXT'}}</button>
+          </div>
+            </div></div>

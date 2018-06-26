@@ -24,7 +24,7 @@
           </mat-menu>
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0">
-      <mat-sidenav #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
+      <mat-sidenav id="appSideNav" #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
           <mat-nav-list id="navList" style="padding-top: 0px;">
           <a mat-list-item *ngFor="let stack of stacks | deleteFilter" class="nav-list-item" [class.selected]="isStackSelected(stack.id)" (click)="stackSelected(stack.id)">
               <h3 matLine> {{stack.title && stack.title.length > 15 ? stack.title.substring(0,15) + '...' : stack.title}} </h3>
@@ -51,23 +51,6 @@
       </eco-fab-speed-dial-actions>
   </eco-fab-speed-dial>
 
+  <button id="hiddenFabTrigger" (click)="speedDial.open = !speedDial.open" style="visibility: none;"></button>
 
-  <div class="cdk-overlay-container" *ngIf="tutorialVisible">
-    <div class="cdk-overlay-connected-position-bounding-box"
-    dir="ltr"
-    style="top: 12px; right: 15.7875px; height: 100%; width: 100%; align-items: flex-end; justify-content: flex-start;">
-    <div id="cdk-overlay-0" class="cdk-overlay-pane" style="pointer-events: none; position: static;"></div></div>
-    <div class="cdk-overlay-backdrop dark-backdrop cdk-overlay-backdrop-showing"></div>
-    <div class="triangle-left" *ngIf="tutorialArrowDirection === 'left'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
-    <div class="triangle-up" *ngIf="tutorialArrowDirection === 'up'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
-    <div class="triangle-right" *ngIf="tutorialArrowDirection === 'right'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
-    <div class="triangle-down" *ngIf="tutorialArrowDirection === 'down'" [style.top]="tutorialArrowTop" [style.left]="tutorialArrowLeft"></div>
-    <div dir="ltr"><div id="cdk-overlay-1"
-      [style.top]="tutorialStepTop"
-      [style.left]="tutorialStepLeft" class="cdk-overlay-pane tutorial-panel" style="pointer-events: auto; display: flex; flex-direction: column;">
-      {{tutorialStepText}}
-      <div style="display: flex; padding-top: 20px;" [style.justify-content]="showTutorialPreviousBtn ? 'space-between' : 'flex-end'">
-          <button mat-button (click)="prevStep()" *ngIf="showTutorialPreviousBtn">PREVIOUS</button>
-          <button mat-button (click)="nextStep()">{{tutorialNextBtnText}}</button>
-      </div>
-        </div></div></div>
+<guided-tour [config]="guidedTourConfig" [isVisible]="tutorialVisible" (nextClick)="onNextStep($event)" (previousClick)="onPrevStep($event)" (finishClick)="onFinish()"></guided-tour>
