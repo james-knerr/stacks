@@ -5,17 +5,9 @@
         <span style="margin-left: 8px; font-family: 'Lobster', cursive; font-size: 32px;">Stacks</span></span>
         <span style="flex: 33.3; text-align: right;"><button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon style="vertical-align: middle;" class="mdi-24px" fontSet="mdi" fontIcon="mdi-dots-vertical"></mat-icon></button></span>
         <mat-menu x-position="before" #appMenu="matMenu">
-            <button mat-menu-item [routerLink]="['/profile']" routerLinkActive="active">
-              <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-account-circle"></mat-icon>
-              <span style="vertical-align: middle;"> Profile </span>
-            </button>
             <button mat-menu-item (click)="showTutorial()">
                 <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-help-circle"></mat-icon>
                 <span style="vertical-align: middle;"> Tutorial </span>
-              </button>
-              <button mat-menu-item (click)="showAbout()">
-                <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-information"></mat-icon>
-                <span style="vertical-align: middle;"> About </span>
               </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon class="mdi-24px" fontSet="mdi" fontIcon="mdi-lock"></mat-icon>
@@ -25,14 +17,14 @@
     </mat-toolbar>
     <mat-sidenav-container class="app-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 64 : 0">
       <mat-sidenav id="appSideNav" #appSideNav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="64">
-          <mat-nav-list id="navList" style="padding-top: 0px;">
+          <mat-nav-list id="navList" style="padding-top: 0px; flex: 1;">
           <a mat-list-item *ngFor="let stack of stacks | deleteFilter" class="nav-list-item" [class.selected]="isStackSelected(stack.id)" (click)="stackSelected(stack.id)">
               <h3 matLine> {{stack.title && stack.title.length > 15 ? stack.title.substring(0,15) + '...' : stack.title}} </h3>
-              <!--<button mat-icon-button (click)="deleteStack($event, stack.id)">
-                    <mat-icon style="vertical-align: middle;" class="mdi-24px nav-list-icon" [class.selected]="isStackSelected(stack.id)" fontSet="mdi" fontIcon="mdi-delete"></mat-icon>
-             </button>-->
             </a>
           </mat-nav-list>
+          <div class="copyright">
+              © 2018 Stacks LLC. All rights reserved.
+          </div>
       </mat-sidenav>
       <mat-sidenav-content>
           <router-outlet>

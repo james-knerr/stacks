@@ -11,6 +11,8 @@
     right: 0;
   }
   mat-sidenav {
+    display: flex;
+    flex-direction: column;
     border-right: solid 1px rgba(0, 0, 0, 0.32);
     min-width: 200px !important;
   }
@@ -45,39 +47,9 @@
     bottom: 10px;
 }
 
-.triangle-left {
-    z-index: 1000;
-    position: absolute;
-	width: 0;
-	height: 0;
-	border-top: 12px solid transparent;
-	border-right: 24px solid #76B29D;
-	border-bottom: 12px solid transparent;
-}
-.triangle-up {
-    z-index: 1000;
-    position: absolute;
-	width: 0;
-	height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	border-bottom: 24px solid #76B29D;
-}
-.triangle-right {
-    z-index: 1000;
-    position: absolute;
-	width: 0;
-	height: 0;
-	border-top: 12px solid transparent;
-	border-left: 24px solid #76B29D;
-	border-bottom: 12px solid transparent;
-}
-.triangle-down {
-    z-index: 1000;
-    position: absolute;
-	width: 0;
-	height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	border-top: 24px solid #76B29D;
+.copyright {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 10.5px;
 }
