@@ -6,6 +6,7 @@ import { CacheService } from 'ng2-cache';
 import { MainService } from '../main.service';
 import { LoginService } from '../../login.module/login.service';
 import { AddRecordFormComponent } from '../../shared.module/add-record-form.component/add-record-form.component';
+import { AddStackFormComponent } from '../../shared.module/add-stack-form.component/add-stack-form.component';
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
 import {
   GuidedTourConfig,
@@ -113,19 +114,39 @@ public isStackSelected(stackId: string): boolean {
 }
 
 public addStack() {
-
+  const dialogRef = this._dialog.open(AddStackFormComponent, { disableClose: true });
+  dialogRef.componentInstance.setModel(this.stacks.length.toString());
+  dialogRef.afterClosed()
+      .subscribe(result => {
+          this.handleAddStackFormClosed(result);
+      });
 }
 
+public handleAddStackFormClosed(result: { event: string, data?: StackListVM }) {
+  switch (result.event) {
+      case 'cancelled':
+          // do nothing
+          break;
+      case 'added':
+      this.stacks.push(result.data);
+      this.stackSelected(result.data.id);
+          // unsure
+          break;
+      default:
+      // throw error
+          break;
+  }
+}
 public addRecord() {
   const dialogRef = this._dialog.open(AddRecordFormComponent, { disableClose: true });
   dialogRef.componentInstance.setModel(this.selectedStackId);
   dialogRef.afterClosed()
       .subscribe(result => {
-          this.handleAddRecordFormClose(result);
+          this.handleAddRecordFormClosed(result);
       });
 }
 
-public handleAddRecordFormClose(result: { event: string, data?: StackVM }) {
+public handleAddRecordFormClosed(result: { event: string, data?: StackVM }) {
   switch (result.event) {
       case 'cancelled':
           // do nothing

@@ -7,6 +7,7 @@ import { MaterialModule } from './material.module/material.module';
 import { FileSelectModule } from './file-select.module/file-select.module';
 
 import { AddRecordFormComponent } from './add-record-form.component/add-record-form.component';
+import { AddStackFormComponent } from './add-stack-form.component/add-stack-form.component';
 import { ComponentSpinnerComponent } from './component-spinner.component/component-spinner.component';
 import { GuidedTourComponent } from './guided-tour.component/guided-tour.component';
 
@@ -24,6 +25,7 @@ import { MainService } from '../main.module/main.service';
   ],
   declarations: [
     AddRecordFormComponent,
+    AddStackFormComponent,
     ComponentSpinnerComponent,
     GuidedTourComponent,
     DeleteFilterPipe,
@@ -36,12 +38,13 @@ import { MainService } from '../main.module/main.service';
     MaterialModule,
     FileSelectModule,
     AddRecordFormComponent,
+    AddStackFormComponent,
     ComponentSpinnerComponent,
     GuidedTourComponent,
     DeleteFilterPipe,
     SliceArrayPipe
   ],
-  entryComponents: [AddRecordFormComponent]
+  entryComponents: [AddRecordFormComponent, AddStackFormComponent]
 })
 
 export class SharedModule {

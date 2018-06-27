@@ -1,0 +1,23 @@
+<mat-toolbar mat-dialog-title class="dialog-toolbar">
+        <span>
+                <mat-icon style="vertical-align: top;color:rgba(255,255,255,0.87);" class="mdi-32px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon>
+        </span>
+            <span style="margin-left: 8px;">New Stack</span>
+            </mat-toolbar>
+            <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 80vh; width: 50vw; text-align: center; position: relative;">
+                    <app-component-spinner [isBusy]="isBusy"></app-component-spinner>
+                    <mat-form-field color="accent" style="font-size: 16px; max-height: 20%; flex-basis: 25%; flex-shrink: 1;">
+                            <mat-label style="font-size: 16px;">Name of Stack</mat-label>
+                            <input matInput style="font-size: 16px;" [(ngModel)]="stack.title" [disabled]="isBusy">
+                          </mat-form-field>
+            </div>
+            <div mat-dialog-actions>
+              <span>
+                <button mat-button (click)="cancel()">CANCEL</button></span>
+              <span style="flex: 1 1 auto;"></span>
+              <span>
+                <button mat-raised-button [style.background-color]="stack.title ? '#76B29D' : 'rgba(0,0,0,.12)'" [style.color]="stack.title ? '#fafafa' : 'rgba(0, 0, 0, 0.26)'" (click)="saveStack()" [disabled]="!stack.title">
+                                            SAVE NEW STACK
+                                        </button>
+                </span>
+            </div>

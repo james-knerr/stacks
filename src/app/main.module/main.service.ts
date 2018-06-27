@@ -28,6 +28,9 @@ export class MainService {
         this.stackUpdatedSubject.next(stack);
         return k;
     }
+    public addStack(stack: StackListVM): Observable<StackListVM> {
+        return this._httpClient.post<StackListVM>(`${this.apiUrl}/STACKS`, stack);
+    }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
