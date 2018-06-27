@@ -9,10 +9,8 @@ import { AddRecordFormComponent } from '../../shared.module/add-record-form.comp
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
 import {
   GuidedTourConfig,
-  RelativePosition,
-  GuidedTourStep,
-  GuidedTourStepPosition
-} from '../../shared.module/guided-tour.module/guided-tour.models';
+  RelativePosition
+} from '../../shared.module/models/guided-tour-vm';
 
 @Component({
   selector: 'app-main-page',
@@ -48,7 +46,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       stepNumber: 3,
       text: 'Click here to create a new stack',
       overlayPosition: {
-        referenceElementId: 'addStackBtn',
+        referenceElementId: 'speedDial',
         positionRelativeToReferenceElement: RelativePosition.left
       }
     },
@@ -56,7 +54,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
       stepNumber: 4,
       text: 'Click here to add an image to the selected stack',
       overlayPosition: {
-        referenceElementId: 'addImageBtn',
+        referenceElementId: 'speedDial',
         positionRelativeToReferenceElement: RelativePosition.left
       }
     }]
@@ -64,16 +62,6 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public tutorialStep = 1;
   public tutorialVisible = false;
-  public tutorialStepTop = '0px';
-  public tutorialStepLeft = '0px';
-  public tutorialStepText = '';
-  public showTutorialPreviousBtn = false;
-  public tutorialNextBtnText = '';
-  public tutorialArrowDirection = '';
-  public tutorialArrowLeft = '0px';
-  public tutorialArrowTop = '0px';
-  public tutorialArrowLeftOffset = 24;
-  public tutorialArrowTopOffset = 12;
 
   private _mobileQueryListener: () => void;
 
@@ -164,17 +152,9 @@ public showTutorial() {
   const subjectBounds = tutorialSubject.getBoundingClientRect();
   tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
   const icon = tutorialSubject.children[0].children[0];
-  (icon as HTMLElement).style.marginBottom = '4px';
+  (icon as HTMLElement).style.marginBottom = '7px';
   tutorialSubject.style.zIndex = '1100';
   tutorialSubject.style.border = 'solid 3px #76b29d';
-  /* this.tutorialStepTop = (subjectBounds.top + (subjectBounds.height / 2) - (this.tutorialArrowTopOffset * 2)).toString() + 'px';
-  this.tutorialStepLeft = (subjectBounds.width + 50).toString() + 'px';
-  this.tutorialArrowDirection = 'left';
-  this.tutorialArrowLeft = (subjectBounds.width + 50 - this.tutorialArrowLeftOffset).toString() + 'px';
-  this.tutorialArrowTop = (subjectBounds.top + (subjectBounds.height / 2) - this.tutorialArrowTopOffset).toString() + 'px';
-  this.tutorialStepText = 'Click here to show or hide the list of stacks';
-  this.showTutorialPreviousBtn = false;
-  this.tutorialNextBtnText = 'NEXT'; */
 }
 
 public onNextStep(currentStepNumber: number) {
@@ -199,16 +179,7 @@ public onNextStep(currentStepNumber: number) {
       tutorialSubject.parentElement.style.zIndex = '1100';
       tutorialSubject.parentElement.style.border = 'solid 3px #76b29d';
       tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
-      /* this.tutorialStepTop = (subjectBounds.top + (subjectBounds.height / 2) - (this.tutorialArrowTopOffset * 2)).toString() + 'px';
-      this.tutorialStepLeft = (subjectBounds.width + 50).toString() + 'px';
-      this.tutorialArrowDirection = 'left';
-      this.tutorialArrowLeft = (subjectBounds.width + 50 - this.tutorialArrowLeftOffset).toString() + 'px';
-      this.tutorialArrowTop = (subjectBounds.top + (subjectBounds.height / 2) - this.tutorialArrowTopOffset).toString() + 'px';
-      this.tutorialStep = 2; */
       this.tutorialVisible = true;
-      // this.tutorialStepText = 'Click on a stack to view the images within it';
-      // this.showTutorialPreviousBtn = true;
-      // this.tutorialNextBtnText = 'NEXT';
       break;
     }
     case 3: {
@@ -232,18 +203,9 @@ public onNextStep(currentStepNumber: number) {
       tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
       tutorialSubject.style.border = 'solid 3px #76b29d';
       const icon = tutorialSubject.children[0].children[0];
-      (icon as HTMLElement).style.marginBottom = '4px';
+      (icon as HTMLElement).style.marginBottom = '7px';
       const tutorialContainer = document.getElementById('cdk-overlay-1');
-      /*this.tutorialStepTop = (subjectBounds.top - subjectBounds.height - (this.tutorialArrowTopOffset * 2)).toString()  + 'px';
-      this.tutorialStepLeft = (subjectBounds.left - tutorialContainer.getBoundingClientRect().width).toString() + 'px';
-      this.tutorialArrowDirection = 'right';
-      this.tutorialArrowLeft = (subjectBounds.left - this.tutorialArrowLeftOffset - 13).toString() + 'px';
-      this.tutorialArrowTop = (subjectBounds.top - subjectBounds.height).toString() + 'px';
-      this.tutorialStep = 3;*/
       this.tutorialVisible = true;
-     // this.tutorialStepText = 'Click here to create a new stack';
-      // this.showTutorialPreviousBtn = true;
-      // this.tutorialNextBtnText = 'NEXT';
       break;
     }
     case 4: {
@@ -263,19 +225,8 @@ public onNextStep(currentStepNumber: number) {
       tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
       tutorialSubject.style.border = 'solid 3px #76b29d';
       const icon = tutorialSubject.children[0].children[0];
-      (icon as HTMLElement).style.marginBottom = '4px';
-
-      // const tutorialContainer = document.getElementById('cdk-overlay-1');
-       // this.tutorialStepTop = (+this.tutorialStepTop.replace('px', '') - 50).toString() + 'px';
-      // this.tutorialStepLeft = (subjectBounds.left - tutorialContainer.getBoundingClientRect().width).toString() + 'px';
-      // this.tutorialArrowDirection = 'right';
-      // this.tutorialArrowLeft = (subjectBounds.left - this.tutorialArrowLeftOffset - 13).toString() + 'px';
-      // this.tutorialArrowTop = (+this.tutorialArrowTop.replace('px', '') - 50).toString() + 'px';
-      // this.tutorialStep = 4;
+      (icon as HTMLElement).style.marginBottom = '7px';
       this.tutorialVisible = true;
-      // this.tutorialStepText = 'Click here to add an image to the selected stack';
-      // this.showTutorialPreviousBtn = true;
-      // this.tutorialNextBtnText = 'FINISH';
       break;
     }
   }
@@ -309,24 +260,14 @@ public onPrevStep(currentStepNumber: number) {
         const toggleBtn = document.getElementById('toggleStacksBtn');
         toggleBtn.click();
       }
-
-    //  this.tutorialStep = 1;
   this.tutorialVisible = true;
   const tutorialSubject = document.getElementById('toggleStacksBtn');
   const subjectBounds = tutorialSubject.getBoundingClientRect();
   tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
   const icon = tutorialSubject.children[0].children[0];
-  (icon as HTMLElement).style.marginBottom = '4px';
+  (icon as HTMLElement).style.marginBottom = '7px';
   tutorialSubject.style.zIndex = '1100';
   tutorialSubject.style.border = 'solid 3px #76b29d';
-  /* this.tutorialStepTop = (subjectBounds.top + (subjectBounds.height / 2) - (this.tutorialArrowTopOffset * 2)).toString() + 'px';
-  this.tutorialStepLeft = (subjectBounds.width + 50).toString() + 'px';
-  this.tutorialArrowDirection = 'left';
-  this.tutorialArrowLeft = (subjectBounds.width + 50 - this.tutorialArrowLeftOffset).toString() + 'px';
-  this.tutorialArrowTop = (subjectBounds.top + (subjectBounds.height / 2) - this.tutorialArrowTopOffset).toString() + 'px';
-  this.tutorialStepText = 'Click here to show or hide the list of stacks';
-  this.showTutorialPreviousBtn = false;
-  this.tutorialNextBtnText = 'NEXT'; */
       break;
     }
     case 2: {
@@ -353,16 +294,7 @@ public onPrevStep(currentStepNumber: number) {
       tutorialSubject.parentElement.style.zIndex = '1100';
       tutorialSubject.parentElement.style.border = 'solid 3px #76b29d';
       tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
-      /* this.tutorialStepTop = (subjectBounds.top + (subjectBounds.height / 2) - (this.tutorialArrowTopOffset * 2)).toString() + 'px';
-      this.tutorialStepLeft = (subjectBounds.width + 50).toString() + 'px';
-      this.tutorialArrowDirection = 'left';
-      this.tutorialArrowLeft = (subjectBounds.width + 50 - this.tutorialArrowLeftOffset).toString() + 'px';
-      this.tutorialArrowTop = (subjectBounds.top + (subjectBounds.height / 2) - this.tutorialArrowTopOffset).toString() + 'px';
-      this.tutorialStep = 2; */
       this.tutorialVisible = true;
-      // this.tutorialStepText = 'Click on a stack to view the images within it';
-      // this.showTutorialPreviousBtn = true;
-      // this.tutorialNextBtnText = 'NEXT';
       break;
     }
     case 3: {
@@ -384,18 +316,9 @@ public onPrevStep(currentStepNumber: number) {
       tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
       tutorialSubject.style.border = 'solid 3px #76b29d';
       const icon = tutorialSubject.children[0].children[0];
-      (icon as HTMLElement).style.marginBottom = '4px';
+      (icon as HTMLElement).style.marginBottom = '7px';
       const tutorialContainer = document.getElementById('cdk-overlay-1');
-     /*  this.tutorialStepTop = (subjectBounds.top - subjectBounds.height - (this.tutorialArrowTopOffset * 2)).toString()  + 'px';
-      this.tutorialStepLeft = (subjectBounds.left - tutorialContainer.getBoundingClientRect().width).toString() + 'px';
-      this.tutorialArrowDirection = 'right';
-      this.tutorialArrowLeft = (subjectBounds.left - this.tutorialArrowLeftOffset - 13).toString() + 'px';
-      this.tutorialArrowTop = (subjectBounds.top - subjectBounds.height).toString() + 'px';
-      this.tutorialStep = 3; */
       this.tutorialVisible = true;
-      // this.tutorialStepText = 'Click here to create a new stack';
-      // this.showTutorialPreviousBtn = true;
-      // this.tutorialNextBtnText = 'NEXT';
       break;
     }
   }

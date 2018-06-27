@@ -11,7 +11,7 @@ import {
     RelativePosition,
     GuidedTourStep,
     GuidedTourStepPosition
-  } from '../guided-tour.models';
+  } from '../models/guided-tour-vm';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -49,32 +49,21 @@ export class GuidedTourComponent implements OnChanges {
             this.currentStepPosition = this.config.steps[this.currentStep - 1].overlayPosition;
             this.calculateStepPosition();
             this.calculateArrowPosition();
-            this.highlightCurrentStepReferenceElement();
-            this.resetPreviousStepReferenceElement();
           }
         break;
       }
     }
   }
-
-  public highlightCurrentStepReferenceElement() {
-
-  }
-
-  public resetPreviousStepReferenceElement() {
-
-}
-
   public calculateStepPosition() {
     const relativeElement = document.getElementById(this.currentStepPosition.referenceElementId);
     const relativeElementPosition = relativeElement.getBoundingClientRect();
     const overlayElement = document.getElementById('overlay');
     switch (this.currentStepPosition.positionRelativeToReferenceElement) {
         case RelativePosition.left: {
-            this.stepAbsoluteLeft = (relativeElementPosition.left - overlayElement.clientWidth - 75).toString() + 'px';
-            this.stepAbsoluteRight = 'auto';
-            if ((relativeElementPosition.top + overlayElement.clientHeight) > window.innerHeight) {
-                this.stepAbsoluteTop = (window.innerHeight - overlayElement.clientHeight - 20).toString() + 'px';
+            this.stepAbsoluteLeft = 'auto';
+            this.stepAbsoluteRight = (window.innerWidth - relativeElementPosition.left + 40).toString() + 'px';
+            if (this.currentStep === 3) {
+                this.stepAbsoluteTop = (relativeElementPosition.top + 40).toString() + 'px';
             } else {
                 this.stepAbsoluteTop = (relativeElementPosition.top).toString() + 'px';
             }
@@ -82,9 +71,9 @@ export class GuidedTourComponent implements OnChanges {
             break;
         }
         case RelativePosition.right: {
-            this.stepAbsoluteLeft = ((relativeElementPosition.right > 0 ? relativeElementPosition.right : relativeElement.clientWidth) + 75).toString() + 'px';
+            this.stepAbsoluteLeft = ((relativeElementPosition.right > 0 ? relativeElementPosition.right : relativeElement.clientWidth) + 40).toString() + 'px';
             this.stepAbsoluteRight = 'auto';
-            this.stepAbsoluteTop = (relativeElementPosition.top).toString() + 'px';
+            this.stepAbsoluteTop = (relativeElementPosition.top + (relativeElement.clientHeight / 2) - 5).toString() + 'px';
             this.stepAbsoluteBottom = 'auto';
             break;
         }
@@ -98,7 +87,31 @@ export class GuidedTourComponent implements OnChanges {
   }
 
   public calculateArrowPosition() {
-
+    const relativeElement = document.getElementById(this.currentStepPosition.referenceElementId);
+    const relativeElementPosition = relativeElement.getBoundingClientRect();
+    const overlayElement = document.getElementById('overlay');
+    switch (this.currentStepPosition.positionRelativeToReferenceElement) {
+        case RelativePosition.left: {
+            this.arrowAbsoluteRight = (+(this.stepAbsoluteRight.replace('px', '')) - 23).toString() + 'px';
+            this.arrowAbsoluteLeft = 'auto';
+            this.arrowAbsoluteTop = (+(this.stepAbsoluteTop.replace('px', '')) + 15).toString() + 'px';
+            this.arrowAbsoluteBottom = 'auto';
+            break;
+        }
+        case RelativePosition.right: {
+            this.arrowAbsoluteLeft = (+(this.stepAbsoluteLeft.replace('px', '')) - 23 ).toString() + 'px';
+            this.arrowAbsoluteRight = 'auto';
+            this.arrowAbsoluteTop = this.stepAbsoluteTop;
+            this.arrowAbsoluteBottom = 'auto';
+            break;
+        }
+        case RelativePosition.above: {
+            break;
+        }
+        case RelativePosition.below: {
+            break;
+        }
+    }
   }
 
   public nextStep() {
@@ -107,8 +120,6 @@ export class GuidedTourComponent implements OnChanges {
     this.currentStepPosition = this.config.steps[this.currentStep - 1].overlayPosition;
     this.calculateStepPosition();
     this.calculateArrowPosition();
-    this.highlightCurrentStepReferenceElement();
-    this.resetPreviousStepReferenceElement();
     this.nextClick.emit(this.currentStep);
     } else {
         this.finishClick.emit();
@@ -120,14 +131,12 @@ export class GuidedTourComponent implements OnChanges {
     this.currentStepPosition = this.config.steps[this.currentStep - 1].overlayPosition;
     this.calculateStepPosition();
     this.calculateArrowPosition();
-    this.highlightCurrentStepReferenceElement();
-    this.resetPreviousStepReferenceElement();
     this.previousClick.emit(this.currentStep);
   }
 
   public isCurrentRelativePosition(position: string): boolean {
-    return this.config.steps.find(k => k.stepNumber === this.currentStep)
-      .overlayPosition.positionRelativeToReferenceElement.toString() === position;
+      return RelativePosition[this.config.steps[this.currentStep - 1]
+      .overlayPosition.positionRelativeToReferenceElement] === position;
 }
   public getCurrentStepText(): string {
     return this.config.steps.find(k => k.stepNumber === this.currentStep).text;
