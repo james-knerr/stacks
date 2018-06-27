@@ -1,0 +1,86 @@
+.overlay-container {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay-backdrop {
+    background-color: rgba(0, 0, 0, 0.35);
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 400ms 
+}
+
+.overlay {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 20px;
+    // box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    border-color: #76b29d;
+    border-style: solid;
+    border-width: 3px;
+    outline: 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    overflow: hidden;
+    background: #fafafa;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    max-height: 350px;
+    min-width: 112px;
+    max-width: 280px;
+}
+
+
+.triangle-left {
+    z-index: 1000;
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 12px solid transparent;
+	border-right: 24px solid #76B29D;
+	border-bottom: 12px solid transparent;
+}
+.triangle-up {
+    z-index: 1000;
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-bottom: 24px solid #76B29D;
+}
+.triangle-right {
+    z-index: 1000;
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 12px solid transparent;
+	border-left: 24px solid #76B29D;
+	border-bottom: 12px solid transparent;
+}
+.triangle-down {
+    z-index: 1000;
+    position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-top: 24px solid #76B29D;
+}

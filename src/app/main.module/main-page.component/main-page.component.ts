@@ -7,6 +7,10 @@ import { MainService } from '../main.service';
 import { LoginService } from '../../login.module/login.service';
 import { AddRecordFormComponent } from '../../shared.module/add-record-form.component/add-record-form.component';
 import { StackListVM, StackVM } from '../../shared.module/models/stack-vm';
+import {
+  GuidedTourConfig,
+  RelativePosition
+} from '../../shared.module/models/guided-tour-vm';
 
 @Component({
   selector: 'app-main-page',
@@ -17,6 +21,47 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public stacks: StackListVM[];
   public selectedStackId: string;
   public mobileQuery: MediaQueryList;
+
+  public guidedTourConfig: GuidedTourConfig =
+  {
+    arrowColor: '#76b29d',
+    borderColor: '#76b29d',
+    steps: [{
+      stepNumber: 1,
+      text: 'Click here to show or hide the list of stacks',
+      overlayPosition: {
+        referenceElementId: 'toggleStacksBtn',
+        positionRelativeToReferenceElement: RelativePosition.right
+      }
+    },
+    {
+      stepNumber: 2,
+      text: 'Click on a stack to view the images within it',
+      overlayPosition: {
+        referenceElementId: 'navList',
+        positionRelativeToReferenceElement: RelativePosition.right
+      }
+    },
+    {
+      stepNumber: 3,
+      text: 'Click here to create a new stack',
+      overlayPosition: {
+        referenceElementId: 'speedDial',
+        positionRelativeToReferenceElement: RelativePosition.left
+      }
+    },
+    {
+      stepNumber: 4,
+      text: 'Click here to add an image to the selected stack',
+      overlayPosition: {
+        referenceElementId: 'speedDial',
+        positionRelativeToReferenceElement: RelativePosition.left
+      }
+    }]
+  };
+
+  public tutorialStep = 1;
+  public tutorialVisible = false;
 
   private _mobileQueryListener: () => void;
 
@@ -101,7 +146,182 @@ public logout() {
 }
 
 public showTutorial() {
+  this.tutorialStep = 1;
+  this.tutorialVisible = true;
+  const tutorialSubject = document.getElementById('toggleStacksBtn');
+  const subjectBounds = tutorialSubject.getBoundingClientRect();
+  tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
+  const icon = tutorialSubject.children[0].children[0];
+  (icon as HTMLElement).style.marginBottom = '7px';
+  tutorialSubject.style.zIndex = '1100';
+  tutorialSubject.style.border = 'solid 3px #76b29d';
+}
 
+public onNextStep(currentStepNumber: number) {
+  this.tutorialStep = currentStepNumber;
+  switch (this.tutorialStep) {
+    case 2: {
+      const previousTutorialSubject = document.getElementById('toggleStacksBtn');
+      const previousSubjectBounds = previousTutorialSubject.getBoundingClientRect();
+      previousTutorialSubject.parentElement.parentElement.style.zIndex = '10';
+      const icon = previousTutorialSubject.children[0].children[0];
+      (icon as HTMLElement).style.marginBottom = '0px';
+      previousTutorialSubject.style.zIndex = 'auto';
+      previousTutorialSubject.style.border = 'none';
+
+      const appSideNav = document.getElementById('appSideNav');
+      if (appSideNav.style.visibility === 'hidden') {
+        const toggleBtn = document.getElementById('toggleStacksBtn');
+        toggleBtn.click();
+      }
+      const tutorialSubject = document.getElementById('navList');
+      const subjectBounds = tutorialSubject.getBoundingClientRect();
+      tutorialSubject.parentElement.style.zIndex = '1100';
+      tutorialSubject.parentElement.style.border = 'solid 3px #76b29d';
+      tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
+      this.tutorialVisible = true;
+      break;
+    }
+    case 3: {
+      const previousTutorialSubject = document.getElementById('navList');
+      previousTutorialSubject.parentElement.style.border = 'none';
+      previousTutorialSubject.parentElement.parentElement.style.zIndex = '1';
+
+      const appSideNav = document.getElementById('appSideNav');
+      if (appSideNav.style.visibility === 'visible') {
+        const toggleBtn = document.getElementById('toggleStacksBtn');
+        toggleBtn.click();
+      }
+
+      const speedDial = document.getElementById('speedDial');
+      if (!speedDial.classList.contains('eco-opened')) {
+        const hiddenFabTrigger = document.getElementById('hiddenFabTrigger');
+        hiddenFabTrigger.click();
+      }
+      const tutorialSubject = document.getElementById('addStackBtn');
+      const subjectBounds = tutorialSubject.getBoundingClientRect();
+      tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
+      tutorialSubject.style.border = 'solid 3px #76b29d';
+      const icon = tutorialSubject.children[0].children[0];
+      (icon as HTMLElement).style.marginBottom = '7px';
+      const tutorialContainer = document.getElementById('cdk-overlay-1');
+      this.tutorialVisible = true;
+      break;
+    }
+    case 4: {
+      const speedDial = document.getElementById('speedDial');
+      if (!speedDial.classList.contains('eco-opened')) {
+        const hiddenFabTrigger = document.getElementById('hiddenFabTrigger');
+        hiddenFabTrigger.click();
+      }
+      const previousTutorialSubject = document.getElementById('addStackBtn');
+      previousTutorialSubject.parentElement.parentElement.parentElement.style.zIndex = 'auto';
+      previousTutorialSubject.style.border = 'none';
+      const previousIcon = previousTutorialSubject.children[0].children[0];
+      (previousIcon as HTMLElement).style.marginBottom = '0px';
+
+      const tutorialSubject = document.getElementById('addImageBtn');
+      const subjectBounds = tutorialSubject.getBoundingClientRect();
+      tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
+      tutorialSubject.style.border = 'solid 3px #76b29d';
+      const icon = tutorialSubject.children[0].children[0];
+      (icon as HTMLElement).style.marginBottom = '7px';
+      this.tutorialVisible = true;
+      break;
+    }
+  }
+}
+
+public onFinish() {
+  const previousTutorialSubject = document.getElementById('addImageBtn');
+      previousTutorialSubject.parentElement.parentElement.parentElement.style.zIndex = 'auto';
+      previousTutorialSubject.style.border = 'none';
+      const previousIcon = previousTutorialSubject.children[0].children[0];
+      (previousIcon as HTMLElement).style.marginBottom = '0px';
+  const speedDial = document.getElementById('speedDial');
+  if (speedDial.classList.contains('eco-opened')) {
+    const hiddenFabTrigger = document.getElementById('hiddenFabTrigger');
+    hiddenFabTrigger.click();
+  }
+  this.tutorialVisible = false;
+}
+
+public onPrevStep(currentStepNumber: number) {
+  this.tutorialStep = currentStepNumber;
+  switch (this.tutorialStep) {
+    case 1: {
+      const previousTutorialSubject = document.getElementById('navList');
+      const previousSubjectBounds = previousTutorialSubject.getBoundingClientRect();
+      previousTutorialSubject.parentElement.style.border = 'none';
+      previousTutorialSubject.parentElement.parentElement.style.zIndex = '1';
+
+      const appSideNav = document.getElementById('appSideNav');
+      if (appSideNav.style.visibility === 'visible') {
+        const toggleBtn = document.getElementById('toggleStacksBtn');
+        toggleBtn.click();
+      }
+  this.tutorialVisible = true;
+  const tutorialSubject = document.getElementById('toggleStacksBtn');
+  const subjectBounds = tutorialSubject.getBoundingClientRect();
+  tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
+  const icon = tutorialSubject.children[0].children[0];
+  (icon as HTMLElement).style.marginBottom = '7px';
+  tutorialSubject.style.zIndex = '1100';
+  tutorialSubject.style.border = 'solid 3px #76b29d';
+      break;
+    }
+    case 2: {
+      const appSideNav = document.getElementById('appSideNav');
+      if (appSideNav.style.visibility === 'hidden') {
+        const toggleBtn = document.getElementById('toggleStacksBtn');
+        toggleBtn.click();
+      }
+
+      const previousTutorialSubject = document.getElementById('addStackBtn');
+      previousTutorialSubject.parentElement.parentElement.parentElement.style.zIndex = 'auto';
+      previousTutorialSubject.style.border = 'none';
+      const previousIcon = previousTutorialSubject.children[0].children[0];
+      (previousIcon as HTMLElement).style.marginBottom = '0px';
+
+      const speedDial = document.getElementById('speedDial');
+      if (speedDial.classList.contains('eco-opened')) {
+        const hiddenFabTrigger = document.getElementById('hiddenFabTrigger');
+        hiddenFabTrigger.click();
+      }
+
+      const tutorialSubject = document.getElementById('navList');
+      const subjectBounds = tutorialSubject.getBoundingClientRect();
+      tutorialSubject.parentElement.style.zIndex = '1100';
+      tutorialSubject.parentElement.style.border = 'solid 3px #76b29d';
+      tutorialSubject.parentElement.parentElement.style.zIndex = 'auto';
+      this.tutorialVisible = true;
+      break;
+    }
+    case 3: {
+      const speedDial = document.getElementById('speedDial');
+      if (!speedDial.classList.contains('eco-opened')) {
+        const hiddenFabTrigger = document.getElementById('hiddenFabTrigger');
+        hiddenFabTrigger.click();
+      }
+
+      const previousTutorialSubject = document.getElementById('addImageBtn');
+      const previousSubjectBounds = previousTutorialSubject.getBoundingClientRect();
+      previousTutorialSubject.parentElement.parentElement.parentElement.style.zIndex = 'auto';
+      previousTutorialSubject.style.border = 'none';
+      const previousIcon = previousTutorialSubject.children[0].children[0];
+      (previousIcon as HTMLElement).style.marginBottom = '0px';
+
+      const tutorialSubject = document.getElementById('addStackBtn');
+      const subjectBounds = tutorialSubject.getBoundingClientRect();
+      tutorialSubject.parentElement.parentElement.parentElement.style.zIndex = '1100';
+      tutorialSubject.style.border = 'solid 3px #76b29d';
+      const icon = tutorialSubject.children[0].children[0];
+      (icon as HTMLElement).style.marginBottom = '7px';
+      const tutorialContainer = document.getElementById('cdk-overlay-1');
+      this.tutorialVisible = true;
+      break;
+    }
+  }
 }
 
 public showAbout() {

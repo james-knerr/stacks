@@ -35,12 +35,6 @@
 img {
     width: 100%;
     display: block;
-    opacity: 0.0 ;
-    transition: opacity 1s ease ;
-
-    &.visible {
-        opacity: 1.0 ;
-    }
 }
 
 .column {

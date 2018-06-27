@@ -1,25 +1,25 @@
-<div fxLayout="row wrap" lazyViewport style="padding: 0 4px;" *ngIf="stack?.records && stack?.records?.length > 0">
+<div fxLayout="row wrap" style="padding: 0 4px;" *ngIf="stack?.records && stack?.records?.length > 0">
     <div class="column">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 4" (click)="viewRecordDetails(record)">
-<img [lazySrc]="record.imageUrl" lazySrcVisible="visible">
+<img [src]="record.imageUrl">
 <div class="overlay">{{record.title}}</div>
       </div>
   </div>
   <div class="column">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 2: 4" (click)="viewRecordDetails(record)">
-          <img [lazySrc]="record.imageUrl" lazySrcVisible="visible">
+          <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>
   </div>
   </div>
   <div class="column">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 3: 4" (click)="viewRecordDetails(record)">
-          <img [lazySrc]="record.imageUrl" lazySrcVisible="visible">
+          <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>
   </div>
   </div>
   <div class="column">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 4: 4" (click)="viewRecordDetails(record)">
-          <img [lazySrc]="record.imageUrl" lazySrcVisible="visible">
+          <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>
   </div>
 </div>
