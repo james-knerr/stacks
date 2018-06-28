@@ -10,8 +10,9 @@ export class LoginService {
     private _location: Location) {
   }
 
-  public processLogin() {
+  public processLogin(username: string) {
     localStorage.setItem(cacheKeys.idToken, cacheKeys.placeholderToken);
+    localStorage.setItem(cacheKeys.userEmail, username);
     this._router.navigate(['/app']);
   }
 

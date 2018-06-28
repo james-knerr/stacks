@@ -12,6 +12,7 @@ import {
   GuidedTourConfig,
   RelativePosition
 } from '../../shared.module/models/guided-tour-vm';
+import { RecordVM } from '../../shared.module/models/record-vm';
 
 @Component({
   selector: 'app-main-page',
@@ -115,7 +116,7 @@ public isStackSelected(stackId: string): boolean {
 
 public addStack() {
   const dialogRef = this._dialog.open(AddStackFormComponent, { disableClose: true });
-  dialogRef.componentInstance.setModel(this.stacks.length.toString());
+  dialogRef.componentInstance.setModel();
   dialogRef.afterClosed()
       .subscribe(result => {
           this.handleAddStackFormClosed(result);
@@ -146,7 +147,7 @@ public addRecord() {
       });
 }
 
-public handleAddRecordFormClosed(result: { event: string, data?: StackVM }) {
+public handleAddRecordFormClosed(result: { event: string, data?: RecordVM }) {
   switch (result.event) {
       case 'cancelled':
           // do nothing

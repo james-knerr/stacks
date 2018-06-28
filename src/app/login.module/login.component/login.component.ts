@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     }
   }
   public login() {
-    this._loginService.processLogin();
+    this._loginService.processLogin(this.loginVM.username);
   }
   public pressedKey(key: any) {
     if (key === 13) {

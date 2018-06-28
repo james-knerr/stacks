@@ -1,3 +1,4 @@
+<app-component-spinner [isBusy]="isBusy"></app-component-spinner>
 <div fxLayout="row wrap" style="padding: 0 4px;" *ngIf="stack?.records && stack?.records?.length > 0">
     <div class="column">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 4" (click)="viewRecordDetails(record)">

@@ -26,8 +26,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     SharedModule.forRoot(),
     HttpClientModule,
-    Ng2CacheModule,
-    HttpClientInMemoryWebApiModule.forRoot(AppDataService, { passThruUnknownUrl: true })
+    Ng2CacheModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]

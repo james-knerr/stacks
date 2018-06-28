@@ -25,9 +25,9 @@ public refreshNeededSub: any;
     private _dialog: MatDialog,
     private _mainService: MainService,
     private _activeRoute: ActivatedRoute) {
-      this.refreshNeededSub = this._mainService.stackUpdated$.subscribe((updatedStack: StackVM) => {
-        if (updatedStack != null && this.selectedStackId) {
-          this.stack.records = updatedStack.records;
+      this.refreshNeededSub = this._mainService.stackUpdated$.subscribe((newRecord: RecordVM) => {
+        if (newRecord != null && this.selectedStackId) {
+          this.stack.records.push(newRecord);
         }
       });
     }
@@ -44,15 +44,17 @@ ngOnInit() {
 }
 
 public getStack(forceRefresh?: boolean) {
+  if (this.selectedStackId) {
   this.isBusy = true;
   this._mainService.getStack(this.selectedStackId)
     .subscribe(k => {
-      this.stack = k.filter(kk => kk.id === this.selectedStackId)[0];
+      this.stack = k;
       this.isBusy = false;
     }, err => {
       this._snackBar.open('error', err, 'OK');
       this.isBusy = false;
     });
+  }
 }
 
 public viewRecordDetails(record: RecordVM) {
