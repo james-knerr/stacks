@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { StackListVM, StackVM } from '../shared.module/models/stack-vm';
-import { RecordVM } from '../shared.module/models/record-vm';
 
 @Injectable()
 export class MainService {
@@ -28,6 +27,9 @@ export class MainService {
         const k = this._httpClient.post<StackVM>(`${this.apiUrl}/STACK_CONTENT`, stack);
         this.stackUpdatedSubject.next(stack);
         return k;
+    }
+    public addStack(stack: StackListVM): Observable<StackListVM> {
+        return this._httpClient.post<StackListVM>(`${this.apiUrl}/STACKS`, stack);
     }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

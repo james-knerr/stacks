@@ -8,13 +8,15 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public pageTitle = '';
-  public loadingRoute = false;
+  public pageTitle: string;
+  public loadingRoute: boolean;
+
 
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private _titleService: Title) {
+
     this._router.events.subscribe(
       (event: Event) => {
         this.loadingRoute = true;

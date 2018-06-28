@@ -1,10 +1,10 @@
 <router-outlet>
 </router-outlet>
 <div class="router-spinner-container" [class.no-show]="!loadingRoute" [class.show]="loadingRoute">
-  <div class="router-child-spinner-container" [style.display]="loadingRoute ? 'flex' : 'none'">
-    <div style="position:relative">
-      <div class="router-child-spinner">
-      </div>
+    <div class="router-child-spinner-container" [style.display]="loadingRoute ? 'flex' : 'none'">
+        <div style="position:relative">
+            <div class="router-child-spinner">
+            </div>
+        </div>
     </div>
-  </div>
 </div>
