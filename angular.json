@@ -48,6 +48,23 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "local": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": false,
+              "namedChunks": true,
+              "aot": false,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           }
         },
@@ -59,6 +76,9 @@
           "configurations": {
             "production": {
               "browserTarget": "stacks:build:production"
+            },
+            "local": {
+              "browserTarget": "stacks:build:local"
             }
           }
         },

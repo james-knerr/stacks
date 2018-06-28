@@ -40,19 +40,6 @@ mat-form-field, mat-checkbox {
     padding-right: 10px;
 }
 
-// SNACKBAR
-.error-snackbar {
-    background: #a94442 !important;
-}
-.info-snackbar {
-    background: #0075be !important;
-}
-.success-snackbar {
-    background: #76B29D !important;
-}
-simple-snack-bar.mat-simple-snackbar button.mat-simple-snackbar-action {
-    color: white !important;
-}
 
 // PRELOADER 
 #status {
@@ -431,3 +418,18 @@ mat-icon.light {
   .dark-backdrop {
       background-color: rgba(0, 0, 0, 0.35);
   }
+
+  
+// SNACKBAR
+.error-snackbar {
+    background: #a94442 !important;
+}
+.info-snackbar {
+    background: #0075be !important;
+}
+.success-snackbar {
+    background: #76B29D !important;
+}
+simple-snack-bar.mat-simple-snackbar div.mat-simple-snackbar-action button.mat-button {
+    color: #fafafa !important;
+}
