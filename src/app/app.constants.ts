@@ -1,12 +1,11 @@
 export const cacheKeys = {
 
+    // app data
     stacks: 'stacks',
     stackDetails: ':stack-details',
 
-    idToken: 'id_token',
-    placeholderToken: '21ef2cc0ccf966f85870670e4aef30a879902743',
-    userEmail: ':user-email',
-
+    // misc.
+    sessionInfo: ':session-info',
     termsOfService: `CONDITIONS OF USE
     Welcome to our online store! MYCOMPANY and its associates provide their services to you subject to the following conditions. If you visit or shop within this website, you accept these conditions. Please read them carefully. ​
     

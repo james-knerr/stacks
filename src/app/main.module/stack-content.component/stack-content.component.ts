@@ -43,7 +43,7 @@ ngOnInit() {
 
 }
 
-public getStack(forceRefresh?: boolean) {
+public getStack() {
   if (this.selectedStackId) {
   this.isBusy = true;
   this._mainService.getStack(this.selectedStackId)

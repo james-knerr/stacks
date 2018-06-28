@@ -10,7 +10,15 @@ const mainRoutes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       {
-        path: 'content/:stackId',
+        path: 'details',
+        component: StackContentComponent,
+        data: {
+          menuItem: 'Stacks',
+          title: 'Stacks'
+        },
+      },
+      {
+        path: 'details/:stackId',
         component: StackContentComponent,
         data: {
           menuItem: 'Stacks',

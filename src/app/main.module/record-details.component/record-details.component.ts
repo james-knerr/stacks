@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { MainService } from '../main.service';
 import { RecordVM } from '../../shared.module/models/record-vm';
 
 @Component({
@@ -12,7 +11,6 @@ import { RecordVM } from '../../shared.module/models/record-vm';
     public record: RecordVM;
 
     constructor(
-        private _mainService: MainService,
         private _selfDialogRef: MatDialogRef<RecordDetailsComponent>) {}
 
         public setModel(existingRecord?: RecordVM) {
