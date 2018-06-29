@@ -16,11 +16,12 @@ export class AddStackFormComponent {
     constructor(
         private _snackBar: SnackBarService,
         private _mainService: MainService,
-        private _selfDialogRef: MatDialogRef<AddStackFormComponent>) {}
+        private _selfDialogRef: MatDialogRef<AddStackFormComponent>) {
+          this.stack = new StackListVM();
+        }
 
-        public setModel(newStackId: string) {
+        public setModel() {
             this.stack = new StackListVM();
-            this.stack.id = newStackId;
         }
 
     public cancel() {

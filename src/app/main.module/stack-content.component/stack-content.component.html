@@ -1,23 +1,57 @@
+<app-component-spinner [isBusy]="isBusy"></app-component-spinner>
+<mat-toolbar style="background-color: transparent; border-bottom: solid 1px #ebebeb; margin-bottom: 0px;">
+        <span>{{stack?.title}}</span>
+      </mat-toolbar>
 <div fxLayout="row wrap" style="padding: 0 4px;" *ngIf="stack?.records && stack?.records?.length > 0">
-    <div class="column">
-      <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 4" (click)="viewRecordDetails(record)">
-<img [src]="record.imageUrl">
-<div class="overlay">{{record.title}}</div>
-      </div>
-  </div>
-  <div class="column">
+        <div class="column" *ngIf="mobileQuery.matches">
+                <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 2" (click)="viewRecordDetails(record)">
+                    <img [src]="record.imageUrl">
+                    <div class="overlay">{{record.title}}</div>
+            </div>
+            </div>
+          <div class="column" *ngIf="tabletQuery.matches && !mobileQuery.matches">
+                <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 3" (click)="viewRecordDetails(record)">
+                    <img [src]="record.imageUrl">
+                    <div class="overlay">{{record.title}}</div>
+            </div>
+            </div>
+          <div class="column" *ngIf="!tabletQuery.matches && !mobileQuery.matches">
+              <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 1: 4" (click)="viewRecordDetails(record)">
+                  <img [src]="record.imageUrl">
+                  <div class="overlay">{{record.title}}</div>
+          </div>
+          </div>
+  <div class="column" *ngIf="mobileQuery.matches">
+        <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 2: 2" (click)="viewRecordDetails(record)">
+            <img [src]="record.imageUrl">
+            <div class="overlay">{{record.title}}</div>
+    </div>
+    </div>
+  <div class="column" *ngIf="tabletQuery.matches && !mobileQuery.matches">
+        <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 2: 3" (click)="viewRecordDetails(record)">
+            <img [src]="record.imageUrl">
+            <div class="overlay">{{record.title}}</div>
+    </div>
+    </div>
+  <div class="column" *ngIf="!tabletQuery.matches && !mobileQuery.matches">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 2: 4" (click)="viewRecordDetails(record)">
           <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>
   </div>
   </div>
-  <div class="column">
+  <div class="column" *ngIf="tabletQuery.matches && !mobileQuery.matches">
+        <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 3: 3" (click)="viewRecordDetails(record)">
+            <img [src]="record.imageUrl">
+            <div class="overlay">{{record.title}}</div>
+    </div>
+    </div>
+  <div class="column" *ngIf="!tabletQuery.matches && !mobileQuery.matches">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 3: 4" (click)="viewRecordDetails(record)">
           <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>
   </div>
   </div>
-  <div class="column">
+  <div class="column" *ngIf="!tabletQuery.matches && !mobileQuery.matches">
       <div class="custom-card" *ngFor="let record of stack?.records | sliceArrayPipe: 4: 4" (click)="viewRecordDetails(record)">
           <img [src]="record.imageUrl">
           <div class="overlay">{{record.title}}</div>

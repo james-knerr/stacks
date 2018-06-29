@@ -1,22 +1,43 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CacheService } from 'ng2-cache';
-import { AuthGuardService } from './services/auth-guard.service';
-import { SnackBarService } from './services/snackbar.service';
 import { LoginModule } from '../login.module/login.module';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { ConfigurationService } from './services/configuration.service';
+import { ErrorHandlerService } from './services/error-handler.service';
+import { AccountService } from './services/account.service';
+import { SnackBarService } from './services/snackbar.service';
+
 
 @NgModule({
   imports: [
     LoginModule
   ],
   declarations: [],
-  providers: [AuthGuardService, CacheService, SnackBarService]
+  providers: [
+    AuthService,
+    AuthGuardService,
+    CacheService,
+    SnackBarService,
+    ConfigurationService,
+    ErrorHandlerService,
+    AccountService
+  ]
 })
 export class CoreModule {
 
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [AuthGuardService, CacheService, SnackBarService]
+      providers: [
+        AuthService,
+        AuthGuardService,
+        CacheService,
+        SnackBarService,
+        ConfigurationService,
+        ErrorHandlerService,
+        AccountService
+      ]
     };
   }
 

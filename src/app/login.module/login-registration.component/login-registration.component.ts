@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../core.module/services/snackbar.service';
-import { LoginService } from '../login.service';
 // import { RegisterVM } from '../../shared.module/models/login-vm';
 
 @Component({
@@ -18,15 +17,16 @@ export class LoginRegistrationComponent implements OnInit {
   constructor(
     private _snackBar: SnackBarService,
     private _router: Router,
-    private _loginService: LoginService) {
+    //private _loginService: LoginService
+  ) {
 
    // this.registerVM = new RegisterVM();
   }
 
   ngOnInit() {
-    if (this._loginService.authenticated()) {
-      this._router.navigate(['../../main.module/main-page']);
-    }
+//    if (this._loginService.authenticated()) {
+//      this._router.navigate(['../../main.module/main-page']);
+//    }
   }
   public register() {
     /*

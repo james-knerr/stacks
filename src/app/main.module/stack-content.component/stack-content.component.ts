@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -14,20 +15,31 @@ import { RecordVM } from '../../shared.module/models/record-vm';
   templateUrl: './stack-content.component.html',
   styleUrls: ['./stack-content.component.scss']
 })
-export class StackContentComponent implements OnInit {
+export class StackContentComponent implements OnInit, OnDestroy {
 public stack: StackVM;
 public selectedStackId: string;
 public isBusy: boolean;
 public refreshNeededSub: any;
-
+public mobileQuery: MediaQueryList;
+private _mobileQueryListener: () => void;
+public tabletQuery: MediaQueryList;
+private _tabletQueryListener: () => void;
   constructor(
     private _snackBar: SnackBarService,
     private _dialog: MatDialog,
     private _mainService: MainService,
-    private _activeRoute: ActivatedRoute) {
-      this.refreshNeededSub = this._mainService.stackUpdated$.subscribe((updatedStack: StackVM) => {
-        if (updatedStack != null && this.selectedStackId) {
-          this.stack.records = updatedStack.records;
+    private _activeRoute: ActivatedRoute,
+    public media: MediaMatcher,
+    public changeDetectorRef: ChangeDetectorRef) {
+      this.tabletQuery = media.matchMedia('(max-width: 800px)');
+      this._tabletQueryListener = () => changeDetectorRef.detectChanges();
+      this.tabletQuery.addListener(this._mobileQueryListener);
+      this.mobileQuery = media.matchMedia('(max-width: 600px)');
+      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+      this.mobileQuery.addListener(this._mobileQueryListener);
+      this.refreshNeededSub = this._mainService.stackUpdated$.subscribe((newRecord: RecordVM) => {
+        if (newRecord != null && this.selectedStackId) {
+          this.stack.records.push(newRecord);
         }
       });
     }
@@ -40,19 +52,25 @@ ngOnInit() {
       })).subscribe((bool: boolean) => {
         this.getStack();
       });
-
 }
 
-public getStack(forceRefresh?: boolean) {
+ngOnDestroy(): void {
+  this.mobileQuery.removeListener(this._mobileQueryListener);
+  this.tabletQuery.removeListener(this._tabletQueryListener);
+}
+
+public getStack() {
+  if (this.selectedStackId) {
   this.isBusy = true;
   this._mainService.getStack(this.selectedStackId)
     .subscribe(k => {
-      this.stack = k.filter(kk => kk.id === this.selectedStackId)[0];
+      this.stack = k;
       this.isBusy = false;
     }, err => {
       this._snackBar.open('error', err, 'OK');
       this.isBusy = false;
     });
+  }
 }
 
 public viewRecordDetails(record: RecordVM) {

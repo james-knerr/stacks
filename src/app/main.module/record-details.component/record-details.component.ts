@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { MainService } from '../main.service';
 import { RecordVM } from '../../shared.module/models/record-vm';
 
 @Component({
@@ -10,15 +9,24 @@ import { RecordVM } from '../../shared.module/models/record-vm';
   })
   export class RecordDetailsComponent {
     public record: RecordVM;
+    public isImageVertical: boolean;
+    public isImageHorizontal: boolean;
 
     constructor(
-        private _mainService: MainService,
         private _selfDialogRef: MatDialogRef<RecordDetailsComponent>) {}
 
-        public setModel(existingRecord?: RecordVM) {
-            this.record = existingRecord || new RecordVM();
+        public setModel(existingRecord: RecordVM) {
+            this.record = existingRecord;
+            const img = new Image();
+            img.src = this.record.imageUrl;
+            const width = img.naturalWidth;
+            const height = img.naturalHeight;
+            if (width >= height) {
+                this.isImageHorizontal = true;
+            } else {
+                this.isImageVertical = true;
+            }
         }
-
 public closeDetails() {
     this._selfDialogRef.close();
 }

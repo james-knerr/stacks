@@ -39,19 +39,11 @@ export class AddRecordFormComponent {
     }
   public saveRecord() {
     this.isBusy = true;
-    this._mainService.getStack(this.stackId)
+    this._mainService.addRecord(this.record, this.stackId)
       .subscribe(k => {
-        this.stack = k.filter(kk => kk.id === this.stackId)[0];
-        this.stack.records.push(this.record);
-        this._mainService.updateStack(this.stack)
-      .subscribe(kk => {
         this.isBusy = false;
         this._snackBar.open('success', 'Added New Image!', 'OK');
-        this._selfDialogRef.close({ event: 'added', data: this.stack });
-      }, err => {
-        this._snackBar.open('error', err, 'OK');
-        this.isBusy = false;
-      });
+        this._selfDialogRef.close({ event: 'added', data: this.record });
       }, err => {
         this._snackBar.open('error', err, 'OK');
         this.isBusy = false;
