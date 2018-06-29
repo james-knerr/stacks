@@ -6,6 +6,9 @@
             </mat-toolbar>
             <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 80vh; width: 50vw; text-align: center; position: relative;">
                     <app-component-spinner [isBusy]="isBusy"></app-component-spinner>
+                    <div fxLayout="row" fxLayoutAlign="center center" fxFlex="50">
+                        <mat-icon style="vertical-align: middle;color:#586f7c;" class="mdi-240px" fontSet="mdi" fontIcon="mdi-image-filter-none"></mat-icon>
+                </div>
                     <mat-form-field color="accent" style="font-size: 16px; max-height: 20%; flex-basis: 25%; flex-shrink: 1;">
                             <mat-label style="font-size: 16px;">Name of Stack</mat-label>
                             <input matInput style="font-size: 16px;" [(ngModel)]="stack.title" [disabled]="isBusy">

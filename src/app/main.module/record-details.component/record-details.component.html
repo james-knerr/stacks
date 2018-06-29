@@ -1,22 +1,13 @@
-<mat-toolbar mat-dialog-title class="dialog-toolbar">
-      {{record?.title != null ? record.title : 'Record Details'}}
-      </mat-toolbar>
-      <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 80vh; width: 50vw; text-align: center;">
-                    <img style="display: block;
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 50%;" src="{{record?.imageUrl}}">
-                    <mat-form-field color="accent" style="font-size: 16px; max-height: 15%; flex-basis: 25%; flex-shrink: 1;">
-                            <mat-label>Title</mat-label>
-                            <input matInput disabled [(ngModel)]="record.title" >
-                          </mat-form-field>
-                          <mat-form-field color="accent" style="font-size: 16px; max-height: 15%; flex-basis: 25%; flex-shrink: 1;">
-                                <mat-label>Source URL</mat-label>
-                                <input matInput disabled [(ngModel)]="record.sourceUrl" >
-                              </mat-form-field>
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" style="height: 90vh !important; max-height: 90vh !important; width: 60vw !important; max-width: 60vw !important; text-align: center; background-color: rgba(0,0,0,.87);">
+        <div style="display: flex; justify-content: flex-end;"><span><button mat-icon-button mat-dialog-close><mat-icon style="vertical-align: middle;color:#fafafa;" class="mdi-18px" fontSet="mdi" fontIcon="mdi-close"></mat-icon></button></span></div>            
+       
+        <div style="flex-basis: 25%; object-fit: contain;" *ngIf="isImageHorizontal"><img style="vertical-align: middle;
+          width: 100%;
+          height: 100%;" src="{{record?.imageUrl}}">
+        </div>
+        
+        <div style="display: flex; align-items: center; align-self: center; width: 100%; height: 100%; vertical-align: middle;" *ngIf="isImageVertical">
+          <img style="object-fit: contain; flex: 1; height: 90%; vertical-align: middle;" src="{{record?.imageUrl}}">
+        </div>
+                    <div style="color: rgba(255,255,255,0.87); margin-bottom: 8px;">{{record?.title}}</div>
                 </div>
-      <div mat-dialog-actions>
-          <span style="flex: 1 1 auto;"></span>
-        <span>
-          <button mat-button (click)="closeDetails()">CLOSE</button></span>
-      </div>
