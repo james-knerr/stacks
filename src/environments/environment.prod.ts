@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiServer: 'http://stacksapp.azurewebsites.net'
+  apiServer: 'https://stacksapp.azurewebsites.net'
 };
